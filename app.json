@@ -1,0 +1,61 @@
+{
+  "name": "Career & Skill-Gap Advisor Agent",
+  "description": "Multi-agent LangFlow pipeline for personalized career guidance using IBM watsonx.ai and Granite models",
+  "data": {
+    "nodes": [
+      {
+        "id": "ChatInput-01",
+        "type": "ChatInput",
+        "data": {
+          "display_name": "Chat Input",
+          "description": "Student enters resume text, interests, or interview answers"
+        },
+        "position": { "x": 0, "y": 0 }
+      },
+      {
+        "id": "File-01",
+        "type": "File",
+        "data": {
+          "display_name": "Resume / Dataset File",
+          "description": "Loads student resume, job-role taxonomy, or course catalog data"
+        },
+        "position": { "x": 0, "y": 200 }
+      },
+      {
+        "id": "VectorStore-01",
+        "type": "Chroma",
+        "data": {
+          "display_name": "Skill/Job Vector Store",
+          "description": "Stores embedded job-role requirements and course catalog data for RAG retrieval"
+        },
+        "position": { "x": 250, "y": 200 }
+      },
+      {
+        "id": "WatsonxAgent-01",
+        "type": "IBMWatsonxAIAgent",
+        "data": {
+          "display_name": "IBM watsonx AI Agent",
+          "description": "Runs Granite model reasoning over retrieved context + user input",
+          "model_name": "granite-4.0-8b-instruct",
+          "credentials": "SET_YOUR_WATSONX_API_KEY_AND_PROJECT_ID_HERE"
+        },
+        "position": { "x": 500, "y": 100 }
+      },
+      {
+        "id": "ChatOutput-01",
+        "type": "ChatOutput",
+        "data": {
+          "display_name": "Chat Output",
+          "description": "Displays skill-gap report, recommended courses, or interview feedback"
+        },
+        "position": { "x": 750, "y": 0 }
+      }
+    ],
+    "edges": [
+      { "source": "ChatInput-01", "target": "WatsonxAgent-01" },
+      { "source": "File-01", "target": "VectorStore-01" },
+      { "source": "VectorStore-01", "target": "WatsonxAgent-01" },
+      { "source": "WatsonxAgent-01", "target": "ChatOutput-01" }
+    ]
+  }
+}
