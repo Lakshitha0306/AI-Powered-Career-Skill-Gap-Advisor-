@@ -40,5 +40,5 @@ A multi-agent system that analyzes a student's resume/skills, identifies gaps ag
 - Integration with job portals (LinkedIn API) for live postings
 - Regional language and voice support for wider accessibility
 
-## Team
-Lakshitha — 2428026@saec.ac.in
+## Submitted by
+Lakshitha R
